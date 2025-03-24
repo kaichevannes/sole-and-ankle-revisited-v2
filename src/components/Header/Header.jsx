@@ -33,7 +33,7 @@ const Header = () => {
             <NavLink href="/kids">Kids</NavLink>
             <NavLink href="/collections">Collections</NavLink>
           </Nav>
-          <MobileNav>
+          <MobileActions>
             <UnstyledButton>
               <Icon id="shopping-bag" size={24} />
             </UnstyledButton>
@@ -43,7 +43,7 @@ const Header = () => {
             <UnstyledButton onClick={() => setShowMobileMenu(true)}>
               <Icon id="menu" size={24} />
             </UnstyledButton>
-          </MobileNav>
+          </MobileActions>
           <Side />
         </MainHeader>
       </OverflowWrapper>
@@ -64,11 +64,17 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
 
   @media ${QUERIES.tabletAndDown} {
     border-top: 4px solid ${COLORS.gray[900]};
+    padding-right: 29px;
+    align-items: center;
+  }
+
+  @media ${QUERIES.phoneAndDown} {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 `;
 
@@ -82,9 +88,8 @@ const Nav = styled.nav`
   }
 `;
 
-const MobileNav = styled(Nav)`
+const MobileActions = styled.div`
   display: none;
-  margin: 0;
   margin-left: auto;
 
   @media ${QUERIES.tabletAndDown} {
@@ -101,7 +106,7 @@ const Side = styled.div`
   flex: 1;
 
   @media ${QUERIES.tabletAndDown} {
-    flex: 0;
+    flex: revert;
   }
 `;
 

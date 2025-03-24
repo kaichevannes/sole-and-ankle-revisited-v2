@@ -9,17 +9,27 @@ import Spacer from "../Spacer";
 import ShoeSidebar from "../ShoeSidebar";
 import ShoeGrid from "../ShoeGrid";
 
+const ShoeBreadcrumps = () => {
+  return (
+    <Breadcrumbs>
+      <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+    </Breadcrumbs>
+  );
+};
+
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
-        <MobileBreadcrums>
-          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
-        </MobileBreadcrums>
         <Header>
-          <Title>Running</Title>
+          <div>
+            <MobileBreadcrums>
+              <ShoeBreadcrumps />
+            </MobileBreadcrums>
+            <Title>Running</Title>
+          </div>
           <SelectWrapper>
             <Select
               label="Sort"
@@ -35,11 +45,7 @@ const ShoeIndex = ({ sortId, setSortId }) => {
         <ShoeGrid />
       </MainColumn>
       <LeftColumn>
-        <Breadcrumbs>
-          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
-        </Breadcrumbs>
+        <ShoeBreadcrumps />
         <Spacer size={42} />
         <ShoeSidebar />
       </LeftColumn>
@@ -60,11 +66,11 @@ const SelectWrapper = styled.div`
   }
 `;
 
-const MobileBreadcrums = styled(Breadcrumbs)`
+const MobileBreadcrums = styled.div`
   display: none;
 
   @media ${QUERIES.tabletAndDown} {
-    display: flex;
+    display: revert;
   }
 `;
 
@@ -84,6 +90,10 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+
+  @media ${QUERIES.tabletAndDown} {
+    align-items: flex-end;
+  }
 `;
 
 const Title = styled.h2`

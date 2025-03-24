@@ -5,15 +5,11 @@ import UnstyledButton from "../UnstyledButton";
 import Icon from "../Icon";
 import VisuallyHidden from "../VisuallyHidden";
 
-import { COLORS } from "../../constants";
+import { COLORS, WEIGHTS } from "../../constants";
 
 import * as Dialog from "@radix-ui/react-dialog";
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <Dialog.Root open={isOpen} onOpenChange={onDismiss}>
       <Dialog.Portal>
@@ -25,6 +21,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
           <Close>
             <Icon id="close" size={24} />
           </Close>
+          <Filler />
           <Nav>
             <NavLink href="/sale">Sale</NavLink>
             <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -65,21 +62,28 @@ const Content = styled(Dialog.Content)`
   background-color: var(--color-white);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 26px 16px 32px 32px;
+  padding: 24px 32px;
 `;
 
 const Close = styled(Dialog.Close)`
+  position: absolute;
+  top: 8px;
+  right: 0;
   background: none;
   border: none;
   cursor: pointer;
-  align-self: flex-end;
+  padding: 16px;
+`;
+
+const Filler = styled.div`
+  flex: 1;
 `;
 
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  justify-content: flex-end;
+  gap: 16px;
 `;
 
 const NavLink = styled.a`
@@ -87,9 +91,16 @@ const NavLink = styled.a`
   text-transform: uppercase;
   color: ${COLORS.gray[900]};
   text-decoration: none;
+  font-weight: ${WEIGHTS.medium};
+
+  &:first-of-type {
+    color: var(--color-secondary);
+  }
 `;
 
 const Footer = styled.footer`
+  flex: 1;
+  justify-content: flex-end;
   display: flex;
   flex-direction: column;
   gap: 14px;
